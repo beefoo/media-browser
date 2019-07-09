@@ -18,29 +18,12 @@
 
   <div class="app">
     <nav class="sidenav">
-      <ul id="query-list" class="query-list">
-        <li><a href="querystring" class="active">Label A <span>2</span></a></li>
-        <li><a href="querystring">Label B <span>2</span></a></li>
-        <li><a href="querystring">Label C <span>10</span></a></li>
-      </ul>
+      <ul id="query-list" class="query-list"></ul>
     </nav>
     <main>
       <form id="query-form" class="query-form">
-        <div>
-          <label>location</label>
-          <input type="text" name="location" value="40.903125,-73.85062" />
-        </div>
-        <div>
-          <label>locationRadius</label>
-          <input type="text" name="locationRadius" value="10km" />
-        </div>
-        <div>
-          <label>videoLicense</label>
-          <input type="text" name="videoLicense" value="creativeCommon" />
-        </div>
-        <div>
-          <button type="submit">submit</button>
-        </div>
+        <fieldset id="query-inputs"></fieldset>
+        <button type="submit">submit</button>
       </form>
       <ul id="result-list" class="result-list">
         <li>

@@ -86,8 +86,15 @@ main {
 .query-form {
   background: #eee;
   border-bottom: 1px solid #ccc;
+  padding: 1rem;
 }
-.query-form > div {
+.query-form fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+.query-form fieldset > div {
   padding: 1rem;
   display: inline-block;
 }

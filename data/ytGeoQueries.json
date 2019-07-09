@@ -1,0 +1,15 @@
+{
+  "queries": [
+    {
+      "label": "80N - New York, NY",
+      "params": {
+        "location": "40.903125,-73.85062",
+        "locationRadius": "10km",
+        "videoLicense": "creativeCommon",
+        "publishedAfter": "2016-01-01T00:00:00Z"
+      },
+      "uParams": {},
+      "uIds": []
+    }
+  ]
+}
