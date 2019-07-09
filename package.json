@@ -1,0 +1,10 @@
+{
+  "name": "media-browser",
+  "description": "Simple interfaces for browsing media platforms such as Youtube, Flickr, and Internet Archive",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "devDependencies": {
+    "express": "^4.17.1"
+  }
+}
