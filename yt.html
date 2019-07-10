@@ -22,57 +22,16 @@
     </nav>
     <main>
       <form id="query-form" class="query-form">
-        <fieldset id="query-inputs"></fieldset>
+        <fieldset id="query-fieldset"></fieldset>
         <button type="submit">submit</button>
       </form>
-      <ul id="result-list" class="result-list">
-        <li>
-          <a href="#play">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mPs+A8AAhUBiUo2eoUAAAAASUVORK5CYII=">
-            Title A (10 views)
-          </a>
-          <button class="active">unsave</button>
-        </li>
-        <li>
-          <a href="#play">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mPs+A8AAhUBiUo2eoUAAAAASUVORK5CYII=">
-            Title B (1000 views)
-          </a>
-          <button>save</button>
-        </li>
-        <li>
-          <a href="#play">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mPs+A8AAhUBiUo2eoUAAAAASUVORK5CYII=">
-            Title C (100 views)
-          </a>
-          <button>save</button>
-        </li>
-        <li>
-          <a href="#play">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mPs+A8AAhUBiUo2eoUAAAAASUVORK5CYII=">
-            Title D (100 views)
-          </a>
-          <button>save</button>
-        </li>
-        <li>
-          <a href="#play">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mPs+A8AAhUBiUo2eoUAAAAASUVORK5CYII=">
-            Title E (1000 views)
-          </a>
-          <button>save</button>
-        </li>
-        <li>
-          <a href="#play">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mPs+A8AAhUBiUo2eoUAAAAASUVORK5CYII=">
-            Title F (10000 views)
-          </a>
-          <button>save</button>
-        </li>
-      </ul>
+      <ul id="result-list" class="result-list"></ul>
+      <button id="page-link" class="page-link">Load more</button>
     </main>
   </div>
 
   <script src="js/vendor/jquery-3.4.1.min.js"></script>
+  <script src="js/vendor/underscore-min.js"></script>
   <script src="js/app.yt.js"></script>
 </body>
 
