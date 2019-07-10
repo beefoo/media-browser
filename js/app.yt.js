@@ -89,6 +89,11 @@ var YTApp = (function() {
       e.preventDefault();
       _this.doQuery();
     });
+
+    this.$resultList.on('click', '.save-link', function(e){
+      e.preventDefault();
+      _this.saveVideo($(this).attr('data-vid'));
+    });
   };
 
   YTApp.prototype.loadQuery = function(index){
@@ -101,6 +106,7 @@ var YTApp = (function() {
     this.$resultList.empty();
     this.$pageLink.removeClass('active');
     this.nextPageToken = false;
+    this.resultData = {};
 
     $('.query-link[data-index="'+index+'"]').addClass('active');
     $.each(query.params, function(key, value){
@@ -113,7 +119,7 @@ var YTApp = (function() {
 
     $.each(this.queries, function(i, query){
       var queryString = decodeURIComponent($.param($.extend({}, query.params, query.uParams)));
-      var $li = $('<li><a href="#?'+queryString+'" data-index="'+i+'" class="query-link">'+query.label+' <span>'+query.uIds.length+'</span></a></li>');
+      var $li = $('<li><a href="#?'+queryString+'" data-index="'+i+'" class="query-link">'+query.label+' <span class="save-count">'+query.uIds.length+'</span></a></li>');
       _this.$queryList.append($li);
     });
 
@@ -136,6 +142,7 @@ var YTApp = (function() {
 
   YTApp.prototype.onSearchResults = function(items){
     var _this = this;
+    var query = this.queries[this.currentQueryIndex];
 
     this.$resultList.removeClass('loading empty');
     if (!items || items.length < 1) {
@@ -153,11 +160,57 @@ var YTApp = (function() {
           html += '<img src="'+item.snippet.thumbnails.default.url+'" />';
           html += item.snippet.title + ' ('+item.statistics.viewCount+' views)';
         html += '</a>';
-        html += '<button class="active">unsave</button>';
+        if (query.uIds.indexOf(item.id) >= 0) {
+          html += '<button class="save-link active" data-vid="'+item.id+'">unsave</button>';
+        } else {
+          html += '<button class="save-link" data-vid="'+item.id+'">save</button>';
+        }
       html += '</li>';
       var $li = $(html);
       _this.$resultList.append($li);
+      _this.resultData[item.id] = item;
     });
+  };
+
+  YTApp.prototype.saveUserData = function(){
+    var data = {
+      'filename': this.opt.queriesUrl,
+      'data': JSON.stringify({'queries': this.queries})
+    }
+    $.post('/save/udata', data, function(resp){
+      console.log("Saved user data");
+    });
+  };
+
+  YTApp.prototype.saveVideoData = function(vid){
+    var data = {
+      'id': vid,
+      'data': JSON.stringify(this.resultData[vid])
+    }
+    $.post('/save/vdata', data, function(resp){
+      console.log("Saved video data");
+    });
+  };
+
+  YTApp.prototype.saveVideo = function(vid){
+    var $link = $('.save-link[data-vid="'+vid+'"]');
+    var uIds = this.queries[this.currentQueryIndex].uIds;
+
+    if ($link.hasClass('active')) {
+      $link.removeClass('active');
+      $link.text('save');
+      this.queries[this.currentQueryIndex].uIds = _.without(uIds, vid);
+    } else {
+      $link.addClass('active');
+      $link.text('unsave');
+      if (uIds.indexOf(vid) < 0) this.queries[this.currentQueryIndex].uIds.push(vid);
+    }
+
+    var count = this.queries[this.currentQueryIndex].uIds.length;
+    $('.query-link[data-index="'+this.currentQueryIndex+'"]').find('.save-count').text(count);
+
+    this.saveVideoData(vid);
+    this.saveUserData();
   };
 
   return YTApp;

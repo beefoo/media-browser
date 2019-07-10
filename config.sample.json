@@ -1,3 +1,4 @@
 {
+  "videoDataSaveDirectory": "./downloads/",
   "ytApiKey": "<Your Youtube API Key>"
 }
