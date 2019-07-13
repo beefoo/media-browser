@@ -7,7 +7,9 @@ const fs = require('fs');
 const cfg = require("./config.json");
 const app = express();
 
-fs.mkdir(cfg.videoDataSaveDirectory, { recursive: true });
+fs.mkdir(cfg.videoDataSaveDirectory, { recursive: true }, function(err){
+  if (err) throw err;
+});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./')); //Tells the app to serve static files from ./
